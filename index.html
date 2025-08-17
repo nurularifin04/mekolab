@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width", initial-scale="1.0">
+  
+  <link rel="icon" type="image/png" href="../assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="../assets/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+  
+  <title>MekoLab: Mekorama Level Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_left_alt,arrow_right_alt,cancel,check,circle,close,data_table,deployed_code,download,edit,image_arrow_up,qr_code,save" />
+  <link rel="stylesheet" href="css/new.css">
+  
+  <!--script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js" defer></script>
+  <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js" defer></script>
+  <script src="https://unpkg.com/qrcode-generator@2.0.2/dist/qrcode.js" defer></script>
+  <script src="https://unpkg.com/sweetalert2@11.22.4/dist/sweetalert2.all.js" defer></script-->
+  <script src="jsQR.js"></script>
+  <script src="pako.js"></script>
+  <script src="qrcode.js"></script>
+  <script src="sweetalert2.all.js"></script>
+</head>
+<body>
+  <div class="container image-view" id="imageContainer">
+    <h1>Quick Replace Mekorama Blocks</h1>
+    <input type="file" accept="image/*" id="imageInput">
+    <img class="hidden" id="uploadedImage" alt="Uploaded Image">
+    <p id="message">Select a Mekorama QR Code image to begin.</p>
+    <div class="button-group">
+      <button class="btn btn-one" id="uploadButton">
+        <span class="material-symbols-outlined">
+          image_arrow_up
+        </span>
+      </button>
+      <button class="btn btn-lime" id="generateButton">
+        <span class="material-symbols-outlined">
+          qr_code
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="container info-view hidden" id="infoView">
+    <table>
+      <tr>
+        <td>Title</td>
+        <td>:</td>
+        <td>
+          <span id="displayTitle">New Level</span>
+          <button class="btn-trans" id="editTitleButton">
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>Author</td>
+        <td>:</td>
+        <td><span id="displayAuthor">Your Name</span></td>
+      </tr>
+    </table>
+  </div>
+    
+  <div class="container edit-view hidden" id="editView">
+    <input type="text" maxlength="16" class="text-input" id="titleInput" placeholder="New Title (max 16 chars)">
+    <button class="btn-trans" id="saveTitleButton">
+      <span class="material-symbols-outlined">
+        save
+      </span>
+    </button>
+  </div>
+  
+  <div class="container blocks-view hidden" id="blockTypes">
+    <h2>Block Summary</h2>
+    <p class="section-description">Choose a block type to start modifying it.</p>
+    <div class="block-summary" id="blockCards">
+    </div>
+  </div>
+  
+  <div class="container properties-view hidden" id="properties">
+    <h2 id="propertyHeader">Select Positions</h2>
+    <p class="section-description">
+      Select positions (and their orientation / font texture) you wish to change.<br>
+      <span>Column(x) | Floor(y) | Layer(z)</span>
+    </p>
+    <div class="select-all">
+      <input type="checkbox" id="selectAll">
+      <label for="selectAll">Select All</label>
+    </div>
+    <div class="property-summary" id="propertyCards">
+    </div>
+    <div class="button-group" id="propertyButton">
+      <button class="btn btn-one" id="backPropertyButton">
+        <span class="material-symbols-outlined">
+          deployed_code
+        </span>
+      </button>
+      <button class="btn btn-lime" id="changePropertyButton">
+        <span class="material-symbols-outlined">
+          check
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="container select-view hidden" id="newBlockSelection">
+    <h2 id="selectHeader">Change Block Type</h2>
+    <p class="section-description" id="selectDescription"></p>
+    <div class="dropdown">
+      <label for="newBlockType">New Block Type:</label>
+      <select class="select-input" id="newBlockType"></select>
+    </div>
+    <div class="dropdown">
+      <label for="newOrientation">New Orientation: [Head - Body]</label>
+      <select class="select-input" id="newOrientation"></select>
+    </div>
+    <div class="dropdown">
+      <label for="newTexture">New Font Texture:</label>
+      <select class="select-input" id="newTexture"></select>
+    </div>
+    <p id="dropnote">(-- Select --) keep an original attribute. </p>
+    <div class="button-group" id="newButton">
+      <button class="btn btn-one" id="cancelNewButton">
+        <span class="material-symbols-outlined">
+          close
+        </span>
+      </button>
+      <button class="btn btn-lime" id="saveNewButton">
+        <span class="material-symbols-outlined">
+          save
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <a class="source" href="https://github.com/nurularifin04/meko" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="#555">
+        <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+      </svg> 
+      Source Code GitHub
+    </a>
+    <span>"QR Code" is registered trademark of DENSO WAVE INCORPORATED.</span>
+  </div>
+  
+  
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
