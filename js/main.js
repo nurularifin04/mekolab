@@ -18,6 +18,7 @@ ui.image.uploadButton.addEventListener('click', () => {
 
 ui.image.fileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
+  event.target.value = '';
   ui.message.textContent = "Decoding..."
   if (file) {
     const reader = new FileReader();
