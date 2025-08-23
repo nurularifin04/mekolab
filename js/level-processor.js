@@ -95,10 +95,7 @@ function displayBlocks() {
   ui.blocks.cards.replaceChildren(...blockArray);
   
   show(ui.blocks.container);
-  hide([
-    ui.newBlocks.container,
-    ui.qr.container
-  ]);
+  hide(ui.newBlocks.container);
   
   updateGrid(ui.blocks.cards, 85);
 }
