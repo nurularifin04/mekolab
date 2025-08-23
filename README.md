@@ -41,20 +41,21 @@ This website uses several third-party libraries for specific functionalities. We
 
 ### List of Libraries
 
-1.  **jsQR** - v1.4.0
-    * Description: Used for scanning QR codes.
-    * License: [https://github.com/cozmo/jsQR/blob/master/LICENSE](https://github.com/cozmo/jsQR/blob/master/LICENSE)
+1.  **jsQR** - v1.4.0 (Modified)
+    * Description: Used for scanning QR codes. This is a custom version, modified to support QR Code Version 23 (109 modules).
+    * Source: Hosted locally within this repository.
+    * License: [Apache 2.0 License](https://github.com/nurularifin04/mekolab/blob/main/lib/LICENSE)
 
 2.  **pako** - v2.1.0
     * Description: Used for data compression and decompression.
-    * License: [https://github.com/nodeca/pako/blob/master/LICENSE](https://github.com/nodeca/pako/blob/master/LICENSE)
+    * License: [MIT License](https://github.com/nodeca/pako/blob/master/LICENSE)
 
 3.  **qrcode-generator** - v2.0.2
     * Description: Used for generating QR codes.
-    * License: [https://github.com/kazuhikoarase/qrcode-generator/blob/master/LICENSE](https://github.com/kazuhikoarase/qrcode-generator/blob/master/LICENSE)
+    * License: [MIT License](https://github.com/kazuhikoarase/qrcode-generator/blob/master/LICENSE)
 
 4.  **SweetAlert2** - v11.22.4
     * Description: Used to display beautiful, custom pop-up notifications and dialogs.
-    * License: [https://github.com/sweetalert2/sweetalert2/blob/main/LICENSE](https://github.com/sweetalert2/sweetalert2/blob/main/LICENSE)
+    * License: [MIT License](https://github.com/sweetalert2/sweetalert2/blob/main/LICENSE)
 
 ---
