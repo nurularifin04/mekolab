@@ -529,10 +529,10 @@ export const fontMap = {
   54: font5464,
   55: font5556,
   56: font5556,
-  57: font5556,
-  58: font5556,
+  57: font5464,
+  58: font5464,
   64: font5464,
-  65: font5556,
+  65: font5464,
   66: font66,
-  67: font5556
+  67: font5464
 }
