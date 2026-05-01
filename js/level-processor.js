@@ -224,7 +224,7 @@ function qrGenerate(data) {
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
       </div>
-      <button class="btn" style="background-color: #00c2ff; width: 65%" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
+      <button class="btn" style="background-color: #00c2ff; width: 65%" id="playUrl" onclick="window.open(playUrl, '_blank')">
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
       </button>
     `,
@@ -239,7 +239,7 @@ function qrGenerate(data) {
     </span>
     `,
     showCancelButton: true,
-    showDenyButton: false,
+    showDenyButton: true,
     didOpen: () => {
       const cvs = document.getElementById('qrCanvas');
       cvs.width = canvasSize;
@@ -270,7 +270,7 @@ function qrGenerate(data) {
       });
     },
     preDeny: () => {
-      window.open('${playUrl}', '_blank');
+      window.open(playUrl, '_blank');
     }
   });
 }
