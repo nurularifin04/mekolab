@@ -232,7 +232,12 @@ function qrGenerate(data) {
     <span class="material-symbols-outlined">
       download
     </span>
-  `,
+    `,
+    denyButtonText: `
+    <span class="material-symbols-outlined">
+      play_arrow
+    </span>
+    `,
     showCancelButton: true,
     showDenyButton: true,
     didOpen: () => {
