@@ -203,6 +203,9 @@ function displayNewSelection() {
 function qrGenerate(data) {
   let dataString = '';
   data.forEach(char => dataString += String.fromCharCode(char));
+
+  const base64 = btoa(dataString);
+  const playUrl = `mekorama.com/play/?l=${base64}`;
   
   const typeNumber = 0;
   const errorCorrectionLevel = 'L';
@@ -220,6 +223,11 @@ function qrGenerate(data) {
     html: `
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
+        <a href="playUrl"
+          <span class="material-symbols-outlined">
+            play
+          </span>
+        </a>
       </div>
     `,
     confirmButtonText: `
