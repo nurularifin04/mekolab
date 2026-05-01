@@ -223,13 +223,10 @@ function qrGenerate(data) {
     html: `
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
-        <br>
-        <a href="${playUrl}" targe="_blank">
-          <span class="material-symbols-outlined">
-            play_arrow
-          </span>
-        </a>
       </div>
+      <button class="btn btn-lime" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
+        <span class="material-symbols-outlined">play_arrow</span>
+      </button>
     `,
     confirmButtonText: `
     <span class="material-symbols-outlined">
