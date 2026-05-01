@@ -224,7 +224,7 @@ function qrGenerate(data) {
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
       </div>
-      <button class="btn btn-lime" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
+      <button class="btn" style="background-color:cyan" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
         <span class="material-symbols-outlined">play_arrow</span>
       </button>
     `,
@@ -239,7 +239,7 @@ function qrGenerate(data) {
     </span>
     `,
     showCancelButton: true,
-    showDenyButton: true,
+    showDenyButton: false,
     didOpen: () => {
       const cvs = document.getElementById('qrCanvas');
       cvs.width = canvasSize;
