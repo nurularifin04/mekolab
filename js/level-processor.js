@@ -271,6 +271,7 @@ function qrGenerate(data) {
     },
     preDeny: () => {
       window.open(playUrl, '_blank');
+      return false;
     }
   });
 }
