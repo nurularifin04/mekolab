@@ -234,6 +234,7 @@ function qrGenerate(data) {
     </span>
   `,
     showCancelButton: true,
+    showDenyButton: true,
     didOpen: () => {
       const cvs = document.getElementById('qrCanvas');
       cvs.width = canvasSize;
@@ -262,6 +263,9 @@ function qrGenerate(data) {
           resolve(false);
         });
       });
+    },
+    preDeny: () => {
+      window.open('${playUrl}', '_blank');
     }
   });
 }
