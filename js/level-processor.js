@@ -205,7 +205,7 @@ function qrGenerate(data) {
   data.forEach(char => dataString += String.fromCharCode(char));
 
   const base64 = btoa(dataString);
-  const playUrl = `https:/\/mekorama.com/play/?l=${base64}`;
+  const playUrl = `https:/\/mekorama.com/play/?l=${encodeURIComponent(base64)}`;
   
   const typeNumber = 0;
   const errorCorrectionLevel = 'L';
