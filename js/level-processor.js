@@ -225,7 +225,7 @@ function qrGenerate(data) {
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
         <a href="${playUrl}"
           <span class="material-symbols-outlined">
-            play
+            play_arrow
           </span>
         </a>
       </div>
