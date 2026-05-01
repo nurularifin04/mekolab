@@ -223,7 +223,8 @@ function qrGenerate(data) {
     html: `
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
-        <a href="${playUrl}"
+        <br>
+        <a href="${playUrl}" targe="_blank">
           <span class="material-symbols-outlined">
             play_arrow
           </span>
