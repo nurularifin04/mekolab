@@ -224,7 +224,7 @@ function qrGenerate(data) {
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
       </div>
-      <button class="btn" style="background-color: #00ced1; width: 100%;" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
+      <button class="btn" style="background-color: #58b6d7; width: 100%;" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
       </button>
     `,
@@ -242,7 +242,9 @@ function qrGenerate(data) {
     showDenyButton: false,
     didOpen: () => {
       const actions = SourSwal.getActions();
-      actions.style.marginTop = '1rem';
+      const content = Swal.getHtmlContainer();
+      actions.style.marginTop = '0px';
+      content.style.marginBottom = '0px';
       
       const cvs = document.getElementById('qrCanvas');
       cvs.width = canvasSize;
