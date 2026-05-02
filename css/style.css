@@ -348,6 +348,7 @@ td:nth-child(3) {
 
 .sour-actions .btn {
   flex-grow: 0;
+  margin: 0;
 }
 
 .qr-container {
