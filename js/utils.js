@@ -171,12 +171,18 @@ const SourSwal = Swal.mixin({
     htmlContainer: 'sour-html',
     actions: 'sour-actions',
     confirmButton: 'btn btn-lime',
+	denyButton: 'btn btn-blue',
     cancelButton: 'btn btn-one'
   },
   iconColor: '#32cd32',
   confirmButtonText: `
     <span class="material-symbols-outlined">
       circle
+    </span>
+  `,
+	denyButtonText: `
+    <span class="material-symbols-outlined">
+      block
     </span>
   `,
   cancelButtonText: `
