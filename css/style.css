@@ -3,11 +3,10 @@
   --one-color: #123456; /*rgb(18, 52, 86);*/
   --two-color: #234567;
   --three-color: #345678;
+  --blue-color: #58b6d7;
   --lime-trans: rgba(50, 205, 50, 0.05);
   --one-trans: rgba(18, 52, 86, 0.05);
   --lime-shadow: 0 0 0.3rem 0.05rem #32cd32;
-  
-  
 }
 
 html {
@@ -327,28 +326,39 @@ td:nth-child(3) {
 
 .sour-html {
   font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
 }
 
 .sour-popup {
   border-radius: 2rem;
-  padding: 2rem 1rem;
-  gap: 0.5rem;
+  margin: 0;
+  padding: 2rem;
+  gap: 1rem;
 }
 
 .sour-title {
   font-size: 2.5rem;
   color: var(--one-color);
-  padding-top: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 .sour-icon {
+  margin: 0;
+  padding: 0;
   color: var(--lime-color);
   background-color: var(--lime-color);
 }
 
-.sour-actions .btn {
-  flex-grow: 0;
+.sour-actions {
   margin: 0;
+  padding: 0;
+  gap: 1rem;
+  width: 100%;
+}
+.sour-actions .btn {
+  width: auto;
 }
 
 .qr-container {
