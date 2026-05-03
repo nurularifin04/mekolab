@@ -358,9 +358,8 @@ td:nth-child(3) {
 .sour-actions {
   margin: 0;
   padding: 0;
-  gap: 1rem;
-  width: 100%;
 }
+
 .sour-actions .btn {
   width: auto;
 }
