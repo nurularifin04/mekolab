@@ -89,8 +89,12 @@ a, button {
 .btn {
   color: #fff;
   border-radius: 0.6rem;
-  padding: 1rem 5rem;
+  padding: 1rem 2rem;
   flex-grow: 1;
+  width: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:focus {
