@@ -231,7 +231,7 @@ function qrGenerate(data) {
     </span>
     `,
     denyButtonText: `
-    <span class="material-symbols-outlined">
+    <span style="font-variation-settings: 'FILL' 1" class="material-symbols-outlined">
       play_arrow
     </span>
     `,
