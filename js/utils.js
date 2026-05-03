@@ -171,7 +171,7 @@ const SourSwal = Swal.mixin({
     htmlContainer: 'sour-html',
     actions: 'sour-actions',
     confirmButton: 'btn btn-lime',
-	denyButton: 'btn btn-blue',
+	denyButton: 'btn btn-blue deny-btn',
     cancelButton: 'btn btn-one'
   },
   iconColor: '#32cd32',
