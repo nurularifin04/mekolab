@@ -224,9 +224,6 @@ function qrGenerate(data) {
       <div id="qrContainer" class="qr-container">
         <canvas id="qrCanvas" class="qr-canvas"></canvas>
       </div>
-      <button class="btn" style="background-color: #58b6d7; width: 100%;" id="playUrl" onclick="window.open('${playUrl}', '_blank')">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-      </button>
     `,
     confirmButtonText: `
     <span class="material-symbols-outlined">
@@ -239,13 +236,8 @@ function qrGenerate(data) {
     </span>
     `,
     showCancelButton: true,
-    showDenyButton: false,
-    didOpen: () => {
-      const actions = SourSwal.getActions();
-      const content = Swal.getHtmlContainer();
-      actions.style.marginTop = '0px';
-      content.style.marginBottom = '0px';
-      
+    showDenyButton: true,
+    willOpen: () => {
       const cvs = document.getElementById('qrCanvas');
       cvs.width = canvasSize;
       cvs.height = canvasSize;
