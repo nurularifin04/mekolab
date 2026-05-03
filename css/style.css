@@ -101,6 +101,10 @@ button:focus {
   background-color: var(--lime-color);
 }
 
+.btn-blue {
+  background-color: var(--blue-color);
+}
+
 .btn-one {
   background-color: var(--one-color);
 }
