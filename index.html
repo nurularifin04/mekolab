@@ -8,9 +8,22 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg"/>
   <link rel="shortcut icon" href="assets/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png"/>
-  <link rel="manifest" href="assets/favicon/site.webmanifest"/>
-  
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#000000">
+
   <title>MekoLab: Mekorama Level Editor</title>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then(reg => console.log('MekoLab Offline Ready!'))
+          .catch(err => console.log('Error:', err));
+      });
+    }
+  </script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
@@ -24,16 +37,7 @@
   <script src="https://unpkg.com/qrcode-generator@2.0.2/dist/qrcode.js" defer></script>
   <script src="https://unpkg.com/sweetalert2@11.22.4/dist/sweetalert2.all.js" defer></script>
 
-  <link rel="manifest" href="./manifest.json">
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('MekoLab Offline Ready!'))
-          .catch(err => console.log('Gagal daftar SW:', err));
-      });
-    }
-  </script>
+  
 </head>
 <body>
   <div class="container image-view" id="imageContainer">
