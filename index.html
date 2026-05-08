@@ -23,6 +23,17 @@
   <script src="https://unpkg.com/pako@2.1.0/dist/pako.min.js" defer></script>
   <script src="https://unpkg.com/qrcode-generator@2.0.2/dist/qrcode.js" defer></script>
   <script src="https://unpkg.com/sweetalert2@11.22.4/dist/sweetalert2.all.js" defer></script>
+
+  <link rel="manifest" href="./manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('MekoLab Offline Ready!'))
+          .catch(err => console.log('Gagal daftar SW:', err));
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="container image-view" id="imageContainer">
