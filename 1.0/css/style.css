@@ -1,9 +1,7 @@
-
-
-
 @font-face {
-  font-family: 'Baloo 2';
-  src: url('../../assets/font/Baloo2-VariableFont_wght.ttf') format('truetype-variations');
+  font-family: "Baloo 2";
+  src: url("../../assets/font/Baloo2-VariableFont_wght.ttf")
+    format("truetype-variations");
   font-weight: 400 700;
   font-display: swap;
 }
@@ -15,21 +13,22 @@
  * For full license text, visit:
  * https://github.com/google/material-design-icons/blob/master/LICENSE
  */
- 
+
 @font-face {
-  font-family: 'Material Symbols Outlined';
-  src: url('../../assets/font/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2') format('woff2');
+  font-family: "Material Symbols Outlined";
+  src: url("../../assets/font/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2")
+    format("woff2");
   font-display: swap;
 }
 
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined' !important;
+  font-family: "Material Symbols Outlined" !important;
   font-size: 2.4rem;
   font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 :root {
@@ -49,7 +48,9 @@ html {
   scroll-behavior: smooth;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -61,21 +62,22 @@ body {
   margin: 0;
   padding: 2rem;
   gap: 2rem;
-  font-family: 'Baloo 2', 'Ubuntu', sans-serif;
+  font-family: "Baloo 2", "Ubuntu", sans-serif;
   font-size: 1.6rem;
   color: #555;
   text-align: center;
   background-color: #e0f8ff;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: var(--one-color);
   margin: 2rem 0 0 0;
   line-height: 1.3;
 }
 
 .message {
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
 }
 
@@ -99,7 +101,9 @@ h1, h2 {
   grid-template-columns: 1fr;
 }
 
-img, canvas, #imageInput {
+img,
+canvas,
+#imageInput {
   width: 100%;
   max-width: 20rem;
   display: block;
@@ -115,11 +119,13 @@ a {
   color: #555 !important;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   color: #555 !important;
 }
 
-a, button {
+a,
+button {
   user-select: none;
   text-decoration: none;
   appearance: none;
@@ -157,7 +163,8 @@ button:focus {
   background-color: transparent;
 }
 
-.button-group, .sour-actions {
+.button-group,
+.sour-actions {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
@@ -167,7 +174,8 @@ button:focus {
   width: 100%;
 }
 
-.info-view, .edit-view {
+.info-view,
+.edit-view {
   flex-direction: row;
   justify-content: flex-start;
   height: 9rem;
@@ -204,7 +212,8 @@ td:nth-child(3) {
   bottom: 0.2rem;
 }
 
-#displayTitle, #displayAuthor {
+#displayTitle,
+#displayAuthor {
   color: var(--lime-color);
 }
 
@@ -274,7 +283,7 @@ td:nth-child(3) {
   position: relative;
   overflow: hidden;
   border-radius: 0.8rem;
-  background-image: url('../assets/b_atlas.png');
+  background-image: url("../assets/b_atlas.png");
   background-repeat: no-repeat;
   background-size: 1100% 500%;
   background-color: var(--one-trans);
@@ -308,7 +317,9 @@ td:nth-child(3) {
   overflow-y: auto;
   margin: 0;
   padding: 2rem 0.5rem;
-  box-shadow: inset 0 0.4rem 0.5rem -0.5rem #ccc, inset 0 -4px 5px -5px #ccc;
+  box-shadow:
+    inset 0 0.4rem 0.5rem -0.5rem #ccc,
+    inset 0 -4px 5px -5px #ccc;
 }
 
 .property-card {
@@ -363,7 +374,8 @@ td:nth-child(3) {
   background-color: var(--lime-color);
 }
 
-.select-all label, .source {
+.select-all label,
+.source {
   font-weight: bold;
 }
 
@@ -411,7 +423,8 @@ td:nth-child(3) {
   flex: 1.2;
 }
 
-.qr-container, canvas {
+.qr-container,
+canvas {
   display: flex;
   justify-content: center;
   align-items: center;

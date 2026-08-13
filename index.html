@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mekolab: Mekorama Level Editor</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  
+  <title>MekoLab - Mekorama Level Editor</title>
+  
+  <link rel="icon" href="assets/splash_96x96.png">
+  <link rel="stylesheet" href="css/style.ml2.css">
+  <link rel="manifest" href="manifest.json">
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log(reg))
+          .catch(err => console.log(err));
+      });
+    }
+  </script>
+  <script src="debug.js"></script>
+  <script type="module" src="js/app.js"></script>
 </head>
 <body>
-    <!-- MAIN PAGE -->
+
+  <!-- MAIN PAGE -->
   <div class="main-page">
     <h1 id="title-page">MekoLab</h1>
     <div class="card-collector">
@@ -22,5 +40,34 @@
       <button id="share-card">share</button>
     </div>
   </div>
+  
+  <!-- EDIT PAGE -->
+  <div class="edit-page">
+    <canvas id="cvs"></canvas>
+    <div class="edit-btn">
+      <button id="rotate">rotate</button>
+      <button id="geser">translate</button>
+      <button id="tutup">close</button>
+      <button id="open-layer-checkbox">layer</button>
+      <div class="layer-checkbox"></div>
+    </div>
+    <div class="input-container">
+      <button class="back">⬅</button>
+      <div class="block-group"></div>
+      <div class="orient-group hidden"></div>
+      <div class="font-group hidden"></div>
+    </div>
+  </div>
+  
+  <div id="test hidden">
+    <div id="t1"></div>
+    <div id="t2"></div>
+    <div id="t3"></div>
+  </div>
+  
+    
+  <!-- MODAL -->
+  <dialog class="ml2-modal"></dialog>
+  
 </body>
 </html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Symbols Studio - Compact Virtual Scroll</title>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <style>
+    * { 
+      box-sizing: border-box; 
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #080a0c;
+      color: #ffffff;
+      margin: 0;
+      padding: 12px;
+      overflow-y: scroll;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Modern Minimalist Uploader Container */
+    .uploader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px 0 15px 0;
+    }
+
+    .custom-file-upload {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #0b151e;
+      border: 1px solid #00a2ff;
+      color: #00a2ff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .custom-file-upload:active {
+      background-color: #00a2ff;
+      color: #ffffff;
+      transform: scale(0.96);
+    }
+
+    #fileInput { 
+      display: none; 
+    }
+
+    .status-text {
+      font-size: 10px;
+      color: #556677;
+      margin-top: 6px;
+    }
+
+    /* Virtual Scroll Viewport */
+    #scrollViewport {
+      position: relative;
+      width: 100%;
+    }
+
+    /* Fake runway height to match native scrollbar momentum */
+    #scrollRunway {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      z-index: 1;
+    }
+
+    /* Active Icon Container with Exact Uniform Gaps */
+    #visibleContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+      gap: 6px;
+    }
+
+    /* Enhanced Brighter Container Grid Element */
+    .icon-card {
+      background-color: #1b232c;
+      border: 1px solid #2a3746;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      
+      /* Dynamic fluid calculation for exactly 6 columns with uniform 6px gaps */
+      width: calc((100% - (5 * 6px)) / 6);
+      aspect-ratio: 1 / 1;
+      
+      transition: background-color 0.1s, transform 0.05s;
+    }
+
+    /* Responsive adjustments for medium/large viewports */
+    @media (min-width: 480px) {
+      .icon-card { width: calc((100% - (8 * 6px)) / 9); }
+    }
+    @media (min-width: 768px) {
+      .icon-card { width: calc((100% - (15 * 6px)) / 16); }
+    }
+
+    .icon-card:active {
+      background-color: #24303d;
+      transform: scale(0.88);
+    }
+
+    .material-symbols-outlined {
+      font-size: 24px;
+      color: #00b3ff;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Fixed Centered Toast - Auto Width Adjustment */
+    .global-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background-color: #ffffff;
+      color: #000000;
+      text-align: center;
+      padding: 12px 28px;
+      border-radius: 10px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+      
+      /* Membebaskan area lebar toast agar fleksibel mengikuti text */
+      width: max-content; 
+    }
+
+    .global-toast.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Stacked Toast Typography */
+    .toast-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #00a2ff;
+      margin-bottom: 4px;
+      
+      /* Memastikan nama panjang tidak akan patah/wrap ke bawah */
+      white-space: nowrap; 
+    }
+
+    .toast-status {
+      font-size: 10px;
+      font-weight: 600;
+      color: #555555;
+      text-transform: lowercase;
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="uploader-container">
+    <label for="fileInput" class="custom-file-upload">
+      <span style="font-size: 14px; font-weight: bold; line-height: 1;">+</span> Load Codepoints
+    </label>
+    <input type="file" id="fileInput" accept=".codepoints, .txt" />
+    <div class="status-text" id="status">Ready to map asset library</div>
+  </div>
+
+  <div id="scrollViewport">
+    <div id="scrollRunway"></div>
+    <div id="visibleContainer"></div>
+  </div>
+  
+  <div class="global-toast" id="globalToast">
+    <div class="toast-title" id="toastTitle"></div>
+    <div class="toast-status">copied to clipboard</div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const scrollRunway = document.getElementById('scrollRunway');
+    const visibleContainer = document.getElementById('visibleContainer');
+    const statusText = document.getElementById('status');
+    const globalToast = document.getElementById('globalToast');
+    const toastTitle = document.getElementById('toastTitle');
+
+    let iconStorageArray = [];
+    let toastTimeout = null;
+
+    // VIRTUAL SCROLL CONFIGURATIONS
+    let COLUMNS = 6; 
+    let cardHeight = 0; 
+    const BUFFER_ROWS = 3; 
+
+    function updateLayoutMetrics() {
+      const width = window.innerWidth;
+      if (width >= 768) COLUMNS = 16;
+      else if (width >= 480) COLUMNS = 9;
+      else COLUMNS = 6;
+
+      if (iconStorageArray.length > 0) {
+        const sampleCard = visibleContainer.firstChild;
+        if (sampleCard) cardHeight = sampleCard.getBoundingClientRect().height + 6; 
+        
+        const totalRows = Math.ceil(iconStorageArray.length / COLUMNS);
+        scrollRunway.style.height = `${totalRows * cardHeight}px`;
+      }
+    }
+
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      statusText.textContent = "Processing library...";
+      
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const textContent = event.target.result;
+        const lines = textContent.split('\n');
+        
+        iconStorageArray = [];
+        for (let i = 0; i < lines.length; i++) {
+          const trimmed = lines[i].trim();
+          if (!trimmed) continue;
+          const parts = trimmed.split(/\s+/);
+          if (parts[0]) iconStorageArray.push(parts[0]);
+        }
+
+        if (iconStorageArray.length === 0) {
+          statusText.textContent = "Empty file structure detected.";
+          return;
+        }
+
+        visibleContainer.innerHTML = '<div class="icon-card"><span class="material-symbols-outlined">search</span></div>';
+        updateLayoutMetrics();
+        visibleContainer.innerHTML = '';
+
+        const screenHeight = window.innerHeight;
+        const visibleRows = Math.ceil(screenHeight / cardHeight) + (BUFFER_ROWS * 2);
+        const domCount = Math.min(visibleRows * COLUMNS, iconStorageArray.length);
+
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < domCount; i++) {
+          const card = document.createElement('div');
+          card.className = 'icon-card';
+          card.innerHTML = `<span class="material-symbols-outlined"></span>`;
+          fragment.appendChild(card);
+        }
+        visibleContainer.appendChild(fragment);
+
+        updateVirtualScroll();
+        statusText.textContent = `${iconStorageArray.length} assets operational (Virtual DOM Mode)`;
+      };
+      reader.readAsText(file);
+    });
+
+    function updateVirtualScroll() {
+      if (iconStorageArray.length === 0) return;
+
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      
+      let startRow = Math.floor(scrollTop / cardHeight) - BUFFER_ROWS;
+      if (startRow < 0) startRow = 0;
+
+      const startIndex = startRow * COLUMNS;
+      const offsetY = startRow * cardHeight;
+      visibleContainer.style.transform = `translateY(${offsetY}px)`;
+
+      const domElements = visibleContainer.children;
+      for (let i = 0; i < domElements.length; i++) {
+        const dataIndex = startIndex + i;
+        const card = domElements[i];
+
+        if (dataIndex < iconStorageArray.length) {
+          card.style.visibility = 'visible';
+          card.dataset.index = dataIndex; 
+          card.firstChild.textContent = iconStorageArray[dataIndex];
+        } else {
+          card.style.visibility = 'hidden';
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateVirtualScroll);
+    window.addEventListener('resize', () => {
+      updateLayoutMetrics();
+      updateVirtualScroll();
+    });
+
+    visibleContainer.addEventListener('click', function(e) {
+      const card = e.target.closest('.icon-card');
+      if (!card || card.style.visibility === 'hidden') return;
+
+      const targetIndex = card.dataset.index;
+      const nameToCopy = iconStorageArray[targetIndex];
+      if (!nameToCopy) return;
+
+      triggerGlobalPopup(nameToCopy);
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(nameToCopy).catch(() => fallbackCopy(nameToCopy));
+      } else {
+        fallbackCopy(nameToCopy);
+      }
+    });
+
+    function triggerGlobalPopup(text) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      
+      toastTitle.textContent = text;
+      globalToast.classList.add('show');
+      
+      toastTimeout = setTimeout(() => {
+        globalToast.classList.remove('show');
+      }, 2000);
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed"; 
+      textArea.style.top = "0"; 
+      textArea.style.left = "0";
+      textArea.style.width = "1px"; 
+      textArea.style.height = "1px";
+      textArea.style.padding = "0"; 
+      textArea.style.border = "none";
+      textArea.style.outline = "none"; 
+      textArea.style.background = "transparent";
+      document.body.appendChild(textArea);
+      textArea.select();
+      try { 
+        document.execCommand('copy'); 
+      } catch (err) {}
+      document.body.removeChild(textArea);
+    }
+  </script>
+</body>
+</html>

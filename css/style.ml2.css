@@ -1,0 +1,436 @@
+/*
+ * Material Symbols (Google Fonts)
+ * Licensed under the Apache License, Version 2.0.
+ * 
+ * Download version: 22 Oct 2025.
+ *
+ * For full license text, visit:
+ * https://github.com/google/material-design-icons/blob/master/LICENSE
+ */
+ 
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('../assets/font/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('../assets/font/Baloo2-VariableFont_wght.ttf') format('truetype-variations');
+  font-display: swap;
+}
+
+:root {
+  --lab-lime: #32cd32; /* LimeGreen */ /*rgb(50, 205, 50);*/
+  --lab-one: #123456; /*rgb(18, 52, 86);*/
+  --lab-purple: #8e80bf;
+  --lab-blue: #58b6d7;
+  --lab-green: #3ecf7a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 6.25%;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font-family: 'Baloo 2', 'Ubuntu', sans-serif;
+  font-size: 16rem;
+  color: var(--lab-one);
+  background-color: orange;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+a:link, a:visited {
+  color: inherit;
+}
+
+a, button, canvas {
+  user-select: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.hidden, input[type="file"] {
+  display: none !important;
+}
+
+#title-page {
+  color: white;
+}
+
+
+
+/* MAIN PAGE */
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 25rem;
+  gap: 40rem;
+  background-color: #ffa500;
+  background-image: 
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 50%, transparent 50%);
+  width: 100%;
+  bottom: 0;
+  top: 1px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+}
+
+.card-collector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20rem 40rem;
+}
+
+.add-card, .card {
+  position: relative;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 6rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.add-card:active, .card.active {
+  box-shadow: 0 0 6rem 2rem #fff;
+  /*background-color: #fff;
+  */
+  scale: 95%;
+}
+
+
+#label-image-input {
+  order: 1;
+}
+
+.main-toolbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  transform: translateY(100%);
+  transition: transform 0.15s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  padding: 10rem 0;
+  z-index: 99999;
+}
+
+.main-toolbar.open {
+  transform: translateY(0);
+}
+
+.main-toolbar button {
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 30rem;
+  font-variation-settings:
+    'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 30;
+  background-color: transparent;
+  color: #555;
+}
+
+.main-toolbar button:active {
+  color: orange;
+}
+
+.main-toolbar button:disabled {
+  color: #ccc;
+}
+
+#play-online, #share-card {
+  font-variation-settings:
+    'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 30;
+}
+
+/* EDIT PAGE */
+.edit-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  gap: 5rem;
+  transform: translateY(100vh);
+  transition: transform 0.1s ease-in-out;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: "canvas" "button" "toolbar";
+  background-color: orange;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.edit-page.open {
+  transform: translateY(0);
+}
+
+#cvs {
+  grid-area: canvas;
+  object-fit: contain;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid black;
+  background-color: lightblue;
+  touch-action: none;
+}
+
+.edit-btn {
+  grid-area: button;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.input-container {
+  grid-area: toolbar;
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.block-group, .orient-group, .font-group {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  overflow: scroll;
+  gap: 10rem;
+  padding: 20rem;
+  position: absolute;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.bval, .oval, .fval {
+  
+  appearance: none;
+}
+
+.bval::after, .bval:checked::after {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  font-family: 'Material Symbols Outlined' !important;
+  font-size: 30rem;
+  font-variation-settings:
+    'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 30;
+  background-color: transparent;
+}
+
+.bval::after {
+  content: "close";
+  color: #555;
+}
+
+.bval:checked::after {
+  content: "delete";
+  color: #fff;
+}
+
+
+.input-block-mode input[type="radio"]:checked {
+  animation: block 0.3s linear infinite alternate;
+}
+
+
+.layer-checkbox {
+  position: fixed;
+  top: 20px;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10rem;
+  padding: 20rem;
+  
+  background-color: rgba(0,0,0,0.7);
+}
+
+.layer-checkbox.open {
+  transform: translateX(0);
+}
+
+
+#test {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 5px solid black;
+  background-color: blue;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: "t1" "t2" "t3";
+}
+
+#t1 {
+  grid: t1;
+  background-color: white;
+  border: 2px dashed red;
+}
+
+#t2 {
+  grid: t2;
+  background-color: white;
+  border: 2px dashed green;
+}
+
+#t3 {
+  grid: t3;
+  background-color: white;
+  border: 2px dashed purple;
+}
+
+/* DIALOG */
+.ml2-modal {
+  margin: auto;
+  background-color: transparent;
+  overflow: visible;
+  
+}
+
+.ml2-modal[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ml2-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-variation-settings: 'wght' 700;
+  width: 85vw;
+  overflow: hidden;
+  border-radius: 20rem;
+  background-color: white;
+  animation: ml2-modal-show 0.35s ease-out;
+}
+
+.modal-text {
+  text-align: center;
+  padding: 45rem 20rem 35rem 20rem;
+  color: grey;
+}
+
+.modal-footer {
+  display: flex;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-footer button {
+  font-family: 'Baloo 2', 'Ubuntu', sans-serif;
+  font-size: 16rem;
+  font-variation-settings: 'wght' 700;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 20rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: orange;
+  width: 100%;
+}
+
+
+.ml2-modal canvas {
+  animation: load 1.2s linear infinite alternate;
+}
+
+/* KEYFRAMES ANIMATION */
+@keyframes ml2-modal-show {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.12); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes load {
+  0% { translate: -50vw 0 }
+  100% { translate: 50vw 0 }
+}
+
+@keyframes block {
+  0% { transform: translateY(0) }
+  100% { transform: translateY(-10%) }
+}
+
+/* MEDIA */
+@media screen and (min-width: 480px) {
+  .main-page {
+    padding-left: calc((100% - (100% * 9 / 16)) / 2 + 25rem);
+    padding-right: calc((100% - (100% * 9 / 16)) / 2 + 25rem);
+  }
+  
+  .edit-page {
+    flex-direction: row;
+  }
+  
+  .edit-page header div {
+    flex-direction: column;
+  }
+  
+  .modal-wrapper {
+    width: 50vw;
+  }
+  
+}
+
+.render {
+  image-rendering: pixelated;
+}
+
